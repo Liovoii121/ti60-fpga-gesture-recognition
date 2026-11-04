@@ -1,0 +1,14 @@
+{
+  "format": "SC2210_1080P60_120_COLOR_EXPOSURE_V5",
+  "profile": "1080p60in_120out",
+  "settings": {
+    "red": 355,
+    "green": 302,
+    "blue": 342,
+    "contrast": 596,
+    "brightness": 148,
+    "saturation": 458,
+    "phase": 2,
+    "exposure_lines": 667
+  }
+}

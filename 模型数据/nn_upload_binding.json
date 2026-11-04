@@ -1,0 +1,20 @@
+{
+  "protocol": "NLOAD1024_V2_WORDS2_BUSY256_ACK257",
+  "base_address": "0x00800000",
+  "padded_bytes": 113408,
+  "crc32": "97af76cf",
+  "sha256": "705b23b005c261a6a5994fd34298263724036b2ad9e29f2f82fe4ec8305ddfb8",
+  "payload_bytes": 113224,
+  "data_packets": 3544,
+  "idcode": "0x10660A79",
+  "status_busy_bit": 256,
+  "status_ack_toggle_bit": 257,
+  "max_packet_words": 2,
+  "firmware_usercode": "0x50315501",
+  "release_status": "integration_pending_build_hardware_not_tested",
+  "hardware_tested": false,
+  "ddr_readback_hardware_tested": false,
+  "mode": "static_and_continuous_runtime_switch",
+  "static_model_embedded": true,
+  "continuous_model_requires_volatile_ddr_load": true
+}
