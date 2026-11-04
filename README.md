@@ -8,6 +8,32 @@
 - **顶层模块**：`example_top`
 - **统一版本标识**：`0x50315501`
 
+## 仓库内容
+
+本仓库按比赛提交要求，仅包含原始源码压缩包：
+
+```
+基于神经网络的手势识别交互系统源码.rar
+```
+
+下载并解压后即可得到完整工程。压缩包内主要文件：
+
+| 路径 | 说明 |
+|---|---|
+| `Ti60_Demo.xml` | Efinity 工程文件 |
+| `Ti60_Demo.pt.sdc` | 时序约束 |
+| `Ti60_Demo.peri.xml` | 管脚与外设配置 |
+| `example_top.v` | 顶层模块 |
+| `ip/` | IP 源码与配置（DDR、CSI、DSI、FIFO 等） |
+| `src/` | 外设与图像处理源码（ISP、HDMI、LVDS、I2C 等） |
+| `touch_ui/` | 触控 UI 与 Sobel 边缘检测 |
+| `pri/mipi/` | MIPI 接收相关源码 |
+| `模型数据/` | 连续网络权重与量化参数 |
+| `*.v` / `*.sv` / `*.vh` | 业务 RTL 与头文件 |
+| `*.mem` | 模型 ROM、字库、语音等初始化数据 |
+| `文件校验.json` | 全部文件的 SHA-256 校验表 |
+| `代码说明.txt` | 工程与版本说明 |
+
 ## 功能概览
 
 | 模块 | 说明 |
@@ -22,50 +48,31 @@
 
 上电默认进入**静态模式**，通过触控屏最下方按钮在静态与连续手语之间切换。切换离开连续模式时会取消计算并等待已发出的 DDR 读写结束，不复位视频 DDR。
 
-## 目录结构
-
-```
-.
-├── Ti60_Demo.xml            # Efinity 工程文件
-├── Ti60_Demo.pt.sdc         # 时序约束
-├── Ti60_Demo.peri.xml       # 管脚与外设配置
-├── example_top.v            # 顶层
-├── ip/                      # IP 源码与配置（DDR、CSI、DSI、FIFO 等）
-├── src/                     # 外设与图像处理源码（ISP、HDMI、LVDS、I2C 等）
-├── touch_ui/                # 触控 UI 与 Sobel 边缘检测
-├── pri/mipi/                # MIPI 接收相关源码
-├── 模型数据/                 # 连续网络权重与量化参数
-├── *.v / *.sv / *.vh        # 业务 RTL 与头文件
-├── *.mem                    # 模型 ROM、字库、语音等初始化数据
-├── 文件校验.json             # 全部文件的 SHA-256 校验表
-├── 代码说明.txt              # 工程与版本说明
-└── 基于神经网络的手势识别交互系统源码.rar   # 原始提交压缩包（内容与上述目录一致）
-```
-
 ## 打开与编译
 
-1. 安装 **Efinity 2026.1**。
-2. 打开 `Ti60_Demo.xml`。
-3. 确认器件为 `Ti60F225`、顶层为 `example_top`。
-4. 直接综合、布局布线并生成位流。
+1. 解压 `基于神经网络的手势识别交互系统源码.rar`。
+2. 安装 **Efinity 2026.1**。
+3. 打开解压目录中的 `Ti60_Demo.xml`。
+4. 确认器件为 `Ti60F225`、顶层为 `example_top`。
+5. 直接综合、布局布线并生成位流。
 
 工程使用 Efinity 的 **SDC / peri.xml** 约束格式，不包含 Vivado 的 XDC。
 
 ## 文件范围说明
 
-- 本仓库包含：RTL 源码（`.v/.sv/.vh`）、IP 生成源码与 `settings.json`、时序/管脚约束、模型与字库/语音初始化数据（`.mem`、`.bin`）。
+- 压缩包包含：RTL 源码（`.v/.sv/.vh`）、IP 生成源码与 `settings.json`、时序/管脚约束、模型与字库/语音初始化数据（`.mem`、`.bin`）。
 - 不包含：布局布线结果、综合网表、报告、仿真缓存、`.bit/.hex` 位流、训练照片或训练脚本。
 - `ip/DdrCtrl/ddr3_controller.bin` 与 `模型数据/weights_ddr.bin` 是 IP/模型数据文件，不是 FPGA 烧录文件。
-- 连续手语模型需要配套上位机加载到 DDR；上位机程序不在本仓库内。
+- 连续手语模型需要配套上位机加载到 DDR；上位机程序不在压缩包内。
 - 静态模型已固化在 ROM 中，上电即可使用。
 
 ## 完整性校验
 
-仓库内的 `文件校验.json` 记录了每个文件的 SHA-256，可自行核对：
+压缩包内的 `文件校验.json` 记录了每个文件的 SHA-256。解压后可在文件所在目录核对：
 
 ```bash
 python - <<'PY'
-import json, hashlib, os
+import json, hashlib
 m = json.load(open('文件校验.json', encoding='utf-8'))
 bad = [k for k, v in m.items() if hashlib.sha256(open(k, 'rb').read()).hexdigest() != v]
 print('mismatch:', bad or 'none')
